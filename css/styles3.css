@@ -1,0 +1,36 @@
+body {
+    font-family: 'Arial', sans-serif;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh; 
+    margin: 0; 
+    background-color: #0f0f0f;
+}
+
+.maintenance-container {
+    padding: 50px;
+}
+
+.maintenance-message {
+    font-size: 24px;
+    color: #fefefe;;
+    margin-bottom: 20px;
+}
+
+.maintenance-image {
+    max-width: 100%;
+    height: 150px;
+}
+.color-blanco{
+    color: #fefefe;
+}
+.color-rojo{
+    background-color: #B6231B;
+    color: #fefefe;
+}
+.color-rojo:hover{
+    background-color: #B6231B;
+    color: #fefefe;
+}

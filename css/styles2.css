@@ -1,0 +1,212 @@
+#first-section{ /* # es para hacer referencia al nombre de una seccion (id )*/
+    height: 100vh; /* height y width son para que la seccion ocupe toda la pantalla (viewport (vh) ) */
+    width: 100%;
+    background-image: url('/img/bg-inicio.png');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+}
+.button-custom{
+    background-color: red;
+    color: white;
+}
+.button-custom:hover{
+    background-color: red;
+    color: white;
+}
+.h1-inicio-custom{
+    color: red;
+    font-size: 70px;
+}
+.h2-inicio-custom{ /* los puntos se ponen cuando se hacen referencias a nombres de clases */
+    color: white;
+    font-size: 46px;
+}
+.justify{
+    text-align: justify;
+}
+
+#second-section{
+    height: 100vh;
+    width: 100%;
+    background-color: #0f0f0f;
+}
+.ajustar-imagen-second-section{
+    height: 280px;
+    width: 430px;
+    margin-left: 160px;
+}
+.card{
+    border: 1px solid black; 
+    border-radius: 10px; 
+    background-color: #B6231B;
+    align-items: center;
+    margin-left: 80px;
+    margin-top: 20px;
+    width: 300px;
+    height: 300px;
+    transition: transform 0.3s ease-in-out;
+    color:black;
+}
+.card:hover{
+    transform: scale(1.1);
+}
+.img-card{
+    height: 25px;
+    width: 60px;
+}
+.img-card-person{
+    height: 160px;
+    width: 298px;
+}
+
+#third-section{
+    height: 100vh;
+    width: 100%;
+    background: #0f0f0f;
+}
+.hr-third-section{
+    margin: auto;
+    width: 100px;
+    color: #B6231B;
+    border-width: 2px;
+}
+.card-third-section{
+    border: 1px solid black;
+    border-radius: 10px;
+    height: 400px;
+    width: 300px;
+    transition: transform 0.3s ease-in-out;
+    align-items: center;
+    margin: auto;
+    color: #fefefe;
+}
+.container-membership-basic{
+    background-color: #bb782e;
+}
+.border-membership-basic{
+    border-color: #bb782e;
+}
+.hr-membership-basic{
+    margin: auto;
+    width: 200px;
+    color: #bb782e;
+    border-width: 2px;
+}
+.container-membership-platinum{
+    background-color: #c8c8ca;
+}
+.border-membership-platinum{
+    border-color: #c8c8ca;
+}
+.hr-membership-platinum{
+    margin: auto;
+    width: 200px;
+    color: #c8c8ca;
+    border-width: 2px;
+}
+.container-membership-gold{
+    background-color: #c6a74c;
+}
+.border-membership-gold{
+    border-color: #c6a74c;
+}
+.hr-membership-gold{
+    margin: auto;
+    width: 200px;
+    color: #c6a74c;
+    border-width: 2px;
+}
+.card-third-section:hover{
+    transform: translateY(-40px);
+}
+
+#fourth-section{
+    height: 100vh;
+    width: 100%;
+    background-color: #0f0f0f;
+}
+.img-fourth-section{
+    height: 400px;
+    width: 300px;
+    transition: transform 0.3s ease-in-out;
+}
+.img-fourth-section:hover{
+    opacity: .8;
+    transform: scale(1.1);
+}
+
+#fifth-section{
+    height: 100vh;
+    width: 100%;
+    background-color: #0f0f0f;
+}
+.img-card-fifth-section{
+    height: 200px;
+    width: 298px;
+}
+
+footer{
+    background-color: #B6231B;
+    bottom: 0;
+    width: 100%;
+    height: 24%;
+}
+.adjust-image-logo{
+    height: 140px;
+}
+
+.color-rojo{
+    color: #B6231B;
+}
+.color-blanco{
+    color: #fefefe;
+}
+.font-dollar{
+    font-size: 27px;
+}
+.other-font{
+    font-size: 15px;
+}
+.btn-view-all-color{
+    background-color:#B6231B;
+    color: #fefefe;
+}
+.ig-size{
+    height: 60px;
+    width: 60px;
+}
+.fb-size{
+    height: 40px;
+    width: 40px;
+}
+a{
+    text-decoration: none;
+    color: inherit;
+}
+.altoNavbar {
+    height: 80px; 
+    background-color: black;
+}
+/* Cambiar el color del icono del botón desplegable */
+.nav-link.dropdown-toggle::after {
+    color: #fefefe;
+}
+.dropdown-menu {
+    background-color: black; /* Cambiar el color de fondo del dropdown a negro */
+}
+.dropdown-item {
+    color: #fefefe; 
+    transition: background-color 0.1s ease; /* Agrega una transición al color de fondo */
+}
+
+.dropdown-item:hover {
+    background-color: rgba(0, 150, 255, 0.5); /* Cambia el color de fondo al pasar el cursor */
+}
+.navbar-nav .nav-link {
+    transition: background-color 0.3s ease;
+}
+
+.navbar-nav .nav-link:hover {
+    background-color: rgba(0, 150, 255, 0.5); 
+}

@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="icon" type="image/x-png" href="/img/gymshark.png">
+    <link rel="stylesheet" href="/css/styles2.css">
+    <title>FitLife</title>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg altoNavbar">
+        <div class="container">
+            <a class="navbar-brand altoLogo" style="margin-left: 30px;"><h3 class=""><span class="color-blanco">FitLife</span></h3></a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                <ul class="navbar-nav ms-auto nav-bar-right">
+                    <li class="nav-item espacioNavbar" style="margin-right: 50px;">
+                        <a class="nav-link" href="/user/me.html"><span class="color-blanco">My info</span></a>
+                    </li>
+                    <li class="nav-item dropdown espacioNavbar alto">
+                        <a id="loginLink" class="nav-link dropdown-toggle " href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"></a>
+                        <ul class="dropdown-menu dropdown-menu-end">
+                            <li><a id="iniciarSesion" class="dropdown-item" href="/user/actualizar.html"><span class="color-blanco">Update account</span></a></li>
+                            <li><a id="cerrarSesion" class="dropdown-item"  href="/user/login.html"><span class="color-blanco">Log out</span></a></li>
+                            <li><a id="borrarCuenta" class="dropdown-item" href="/user/borrar.html"><span class="color-blanco">Delete account</span></a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>    
+
+    <script>
+        const loginLink = document.getElementById("loginLink");
+        const cookies = document.cookie.split("; ");
+        const tokenCookie = cookies.find(cookie => cookie.startsWith("token="));
+        const token = tokenCookie ? tokenCookie.split("=")[1] : null;
+        if (token) {
+            fetch('http://localhost:8000/api/users/me',{
+                method: 'GET',
+                headers: {
+                    "Authorization" : "Bearer " + token,
+                    "Content-Type": "application/json"
+                }
+            }).then(response => response.json())
+            .then(data=>{
+                console.log("Datos recibidos:", data);
+                if(data.username){
+                    loginLink.textContent = data.username.split(" ")[0];
+                    loginLink.style.color = "white"; // Cambiar el color del texto 
+                }
+            })
+        }
+
+        //agrega un addEventListener al id cerrarSesion
+        cerrarSesion.addEventListener("click", function(event){
+            document.cookie = `${tokenCookie}=; expires=Thu, 01 Jan 2000 00:00:00 UTC; path=/;`; //hace que se elimine la cookie del token poniendo una fecha de caducidad de antes y poniendole un valor vacio, se pone path para asegurar que se elimine en todos los caminos de la app
+        })
+    </script>
+    
+
+      
+
+    <section id="first-section" class="d-flex justify-content-center align-items-center"> <!-- id para hacer referencia a que esta seccion se llama first-section -->
+        <div class="container text-center">
+            <h1 class="h1-inicio-custom">BE GREATER</h1>
+            <h2 class="mb-4 h2-inicio-custom">Be Yourself</h2> <!-- mb-4 hace que para agregar margen la parte inferior o sea agregar mas espacio en la parte de abajo -->
+            <a href= "#second-section" class="btn button-custom">Get Started</a>
+        </div>
+    </section>
+
+    <section id="second-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-6">
+                    <br><br>
+                    <h3> <span class="color-rojo">Welcome To</span> <span class="color-blanco">Us</span></h3>
+                    <p class="color-blanco">Welcome to FitLife - Your Journey to a Healthier You!</p>
+                    <p class="justify color-blanco">At FitLife, we believe in the power of fitness to transform lives. Whether you're a seasoned gym-goer or just starting your fitness journey, our mission is to guide you toward a healthier, stronger, and more vibrant version of yourself.</p>
+                    <p class="justify color-blanco">Explore personalized workout routines designed to meet your fitness goals, discover expert nutritional advice to fuel your body, and become part of a supportive community that shares your passion for a fit and active lifestyle.</p>
+                    <p class="color-blanco">Embrace the journey. Embrace a healthier you. Welcome to FitLife!</p>
+                </div>
+                <div class="col-sm-6">
+                    <br><br>
+                    <img src="/img/gymshark.png" class="img-fluid ajustar-imagen-second-section" alt="logo">
+                </div>
+            </div>
+            <br>
+            <h3 class="text-center"><span class="color-rojo">Don't listen to us,</span>  <span class="color-blanco">listen to them</span></h3>
+            <br>
+            <div class="row">
+                <div class="col-sm-4">
+                    <div class="card">
+                        <img src="/img/persona3.png" class="img-card-person img-fluid" alt="persona1">
+                    <h4 class="text-center">Jhonatan Alexis</h4>
+                    <img src="/img/estrellas.webp" class="img-card" alt="stars">
+                    <p class="justify mx-3">"I feel stronger and healthier thanks to this amazing platform"</p>
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="card">
+                        <img src="/img/persona2.png" class="img-card-person img-fluid" alt="persona2">
+                    <h4 class="text-center">Lionel Messi</h4>
+                    <img src="/img/estrellas.webp" class="img-card" alt="stars">
+                    <p class="justify mx-3">"FitLife made it easy to get started. Simple tips, effective routines and a warm welcome"</p>
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="card">
+                        <img src="/img/persona1.png" class="img-card-person img-fluid" alt="persona3">
+                    <h4 class="text-center">Tom Platz</h4>
+                    <img src="/img/estrellas.webp" class="img-card" alt="stars">
+                    <p class="justify mx-3">"FitLife is not just about exercise, it's a community"</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="third-section">
+        <br><br><br><br>
+        <h1 class="text-center"><span class="color-rojo">Membership </span>  <span class="color-blanco">plans</span></h1>
+        <br>
+        <hr class="hr-third-section">
+        <br><br><br>
+        <div class="container">
+            <div class="row">
+                <a class="col-sm-4">
+                    <div class="card-third-section border-membership-basic" id="membership1">
+                        <br>
+                        <h1 class="text-center"><span class="font-dollar">$</span>8<span class="other-font">/month</span></h1>
+                        <br>
+                        <div class="container-membership-basic">
+                            <h2 class="text-center">Basic</h2>
+                        </div>
+                        <br>
+                        <p class="text-center">Unlimited Website Access</p>
+                        <hr class="hr-membership-basic">
+                        <p class="text-center">Group Training</p>
+                        <hr class="hr-membership-basic">
+                        <p class="text-center">Basic Nutritional Counseling</p>
+                    </div>
+                </a>
+                <a class="col-sm-4">
+                    <div class="card-third-section border-membership-gold" id="membership2">
+                        <br> 
+                        <h1 class="text-center"><span class="font-dollar">$</span>12<span class="other-font">/month</span></h1>
+                        <br>
+                        <div class="container-membership-gold">
+                            <h2 class="text-center">Gold</h2>
+                        </div>
+                        <br>
+                        <p class="text-center">Unlimited Website Access</p>
+                        <hr class="hr-membership-gold">
+                        <p class="text-center">Personalized Coach</p>
+                        <hr class="hr-membership-gold">
+                        <p class="text-center">Specialized Classes</p>
+                        <hr class="hr-membership-gold">
+                        <p class="text-center">VIP Area Access</p>
+                        <hr class="hr-membership-gold">
+                        <p class="text-center">Advanced Nutritional Counseling</p>
+                    </div>
+                </a>
+                <a class="col-sm-4">
+                    <div class="card-third-section border-membership-platinum"id="membership3">
+                        <br>
+                        <h1 class="text-center"><span class="font-dollar">$</span>10<span class="other-font">/month</span></h1>
+                        <br>
+                        <div class="container-membership-platinum">
+                            <h2 class="text-center">Platinum</h2>
+                        </div>
+                        <br>
+                        <p class="text-center">Unlimited Website Access</p>
+                        <hr class="hr-membership-platinum">
+                        <p class="text-center">Personalized Coach</p>
+                        <hr class="hr-membership-platinum">
+                        <p class="text-center">Group Classes</p>
+                        <hr class="hr-membership-platinum">
+                        <p class="text-center">VIP Area Access</p>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        document.getElementById("membership1").addEventListener("click", function(){
+            addMembership(8, 'Basic', 'Unlimited Website Access, Group Training, Basic Nutritional Counseling')
+        })
+        document.getElementById("membership2").addEventListener("click", function(){
+            addMembership(12, 'Gold' ,'Unlimited Website Access, Personalized Coach, Specialized Classes, VIP Area Access, Advanced Nutritional Counseling')
+        })
+        document.getElementById("membership3").addEventListener("click", function(){
+            addMembership(10, 'Platinum', 'Unlimited Website Access, Personalized Coach, Group Classes, VIP Area Access')
+        })
+
+        function addMembership(precio, tipo, descripcion){
+        const cookies = document.cookie.split("; "); 
+        const tokenCookie = cookies.find(cookie => cookie.startsWith("token=")); 
+        const token = tokenCookie ? tokenCookie.split("=")[1] : null;
+
+        if(token) {
+            const jsonData = {
+                precio: precio,
+                tipo: tipo,
+                descripcion: descripcion
+            };
+
+            fetch('http://localhost:8000/api/memberships', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    "Authorization" : "Bearer " + token
+                },
+                body: JSON.stringify(jsonData)
+            })
+            .then(response => {
+                return response.json(); // Convertir la respuesta a JSON
+            })
+            .then(data => {
+                if (data.success) {
+                    alert(data.message); // Muestra el mensaje de éxito
+                } else {
+                    throw new Error(data.message);
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert(error.message);
+            });
+        }
+    }
+    </script>
+
+    <section id="fourth-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-6">
+                    <br><br><br><br>
+                    <h1><span class="color-rojo">OUR TRAINING</span> <span class="color-blanco">PROGRAMS</span></h1>
+                    <br>
+                    <h4><span class="color-blanco">Keep Your Body Fit</span><span class="color-rojo"> And Strong</span></h4>
+                    <br>
+                    <p class="color-blanco justify">Eating healthy is crucial for maintaining overall well-being and promoting a balanced and active lifestyle. The food choices we make directly impact our physical and mental health, influencing our energy levels, immune system, and long-term resilience against diseases.</p>
+                    <br><br><br><br>
+                    <h4><span class="color-rojo">Become The Best Version</span><span class="color-blanco"> Of Yourself</span></h4>
+                    <br>
+                    <p class="color-blanco justify">Engaging in regular physical exercise, particularly through gym workouts, is integral to maintaining a healthy and robust lifestyle. The importance of going to the gym extends beyond merely achieving aesthetic goals; it encompasses numerous physical, mental, and emotional benefits that contribute to an overall enhanced quality of life.</p>
+                    <br><br>
+                    <a href="/wp/wp2.html">
+                        <button class="btn btn-view-all-color">View All</button>
+                    </a>
+                </div>
+                <div class="col-sm-3">
+                    <br><br><br><br><br><br><br><br><br>
+                    <a href="/wp/wp2.html">
+                        <img src="/img/bg.4.png" class="img-fourth-section img-fluid" alt="rutinas">
+                    </a>
+                </div>
+                <div class="col-sm-3">
+                    <br><br><br><br><br><br><br><br><br>
+                    <a href="/wp/wp2.html">
+                        <img src="/img/nutricion.png" class="img-fourth-section img-fluid" alt="nutricion">
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="fifth-section">
+        <br><br>
+        <h1 class="text-center"><span class="color-rojo">Breaking Latest </span><span class="color-blanco">News</span></h1>
+        <br>
+        <hr class="hr-third-section">
+        <br><br>
+        <div class="container">
+            <div class="row">
+                <a href="https://vidiq.com/blog/post/sam-sulek-breaks-youtube-rules-goes-viral/" class="col-sm-4">
+                    <div class="card-third-section">
+                        <img src="/img/bg-2.png" class="img-card-fifth-section" alt="imagen">
+                        <br><br>
+                        <h5 class="text-center">Gym Prodigy Sam Sulek</h5>
+                        <p class="justify mx-3">Meet this child prodigy, this amazing individual has demonstrated an exceptional level of dedication and skill in the world of fitness.</p>
+                    </div>
+                </a>
+                <a href="https://barbend.com/2023-mr-olympia-scorecards/" class="col-sm-4">
+                    <div class="card-third-section">
+                        <img src="/img/bg-3.png" class="img-card-fifth-section" alt="imagen">
+                        <br><br>
+                        <h5 class="text-center">Mr. Olympia 2023 Winners</h5>
+                        <p class="justify mx-4">Discover the champions of Mr. Olympia 2023, where the elite of bodybuilding compete for the most prestigious title.</p>
+                    </div>
+                </a>
+                <a href="https://greenerideal.com/food/11-secrets-creating-healthy-eating-habits-life/" class="col-sm-4">
+                    <div class="card-third-section">
+                        <img src="/img/one-more.png" class="img-card-fifth-section" alt="imagen">
+                        <br><br>
+                        <h5 class="text-center">Secrets to eat more healthy</h5>
+                        <p class="justify mx-4">Unlock the secrets to a healthier lifestyle through mindful eating.</p>
+                    </div>
+                </a>
+            </div>
+        </div>
+        <br><br>
+        <footer> <!-- Contenido del pie de página -->
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-3">
+                        <br>
+                        <img src="/img/gymshark.png" class="adjust-image-logo" alt="logo">
+                        <br><br>
+                    </div>
+                    <div class="col-sm-3">
+                        <br>
+                        <h6 class="my-4">TEL: 9818189203</h6>
+                        <br>
+                        <a href="#third-section">
+                            <h6>BECOME A MEMBER</h6>
+                        </a>
+                    </div>
+                    <div class="col-sm-3">
+                        <br>
+                        <a href="https://g.co/kgs/FFWeNGv">
+                            <h6 class="my-4">OUR GYM</h6>
+                        </a>
+                        <br>
+                        <a>
+                            <h6>Copyright © 2024 FitLife</h6>
+                        </a>
+                    </div>
+                    <div class="col-sm-3">
+                        <br>
+                        <a href="https://www.instagram.com/" class="my-4">
+                            <img src="/img/ig.png" class="ig-size" alt="ig">
+                        </a>
+                        <br><br>
+                        <a href="https://www.facebook.com/">
+                            <img src="/img/fb.png" class="fb-size mx-2" alt="fb">
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </section>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+</body>
+</html>

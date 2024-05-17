@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="/css/styles9.css">
+    <link rel="icon" type="image/x-png" href="/img/gymshark.png">
+    <title>FitLife</title>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg altoNavbar">
+        <div class="container">
+            <a class="navbar-brand altoLogo" style="margin-left: 30px;"><h3 class=""><span class="color-blanco">FitLife</span></h3></a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                <ul class="navbar-nav ms-auto nav-bar-right">
+                    <li class="nav-item espacioNavbar" style="margin-right: 50px;">
+                        <a class="nav-link" href="/wp/wp.html"><span class="color-blanco">Go Back</span></a>
+                    </li>
+                    <li class="nav-item dropdown espacioNavbar alto">
+                        <a id="loginLink" class="nav-link dropdown-toggle " href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"></a>
+                        <ul class="dropdown-menu dropdown-menu-end">
+                            <li><a id="iniciarSesion" class="dropdown-item" href="/user/actualizar.html"><span class="color-blanco">Update account</span></a></li>
+                            <li><a id="cerrarSesion" class="dropdown-item"  href="/user/login.html"><span class="color-blanco">Log out</span></a></li>
+                            <li><a id="borrarCuenta" class="dropdown-item" href="/user/borrar.html"><span class="color-blanco">Delete account</span></a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>   
+
+    <script>
+        const loginLink = document.getElementById("loginLink");
+        const cookies2 = document.cookie.split("; ");
+        const tokenCookie2 = cookies2.find(cookie => cookie.startsWith("token="));
+        const token2 = tokenCookie2 ? tokenCookie2.split("=")[1] : null;
+        if (token2) {
+            fetch('http://localhost:8000/api/users/me',{
+                method: 'GET',
+                headers: {
+                    "Authorization" : "Bearer " + token2,
+                    "Content-Type": "application/json"
+                }
+            }).then(response => response.json())
+            .then(data=>{
+                console.log("Datos recibidos:", data);
+                if(data.username){
+                    loginLink.textContent = data.username.split(" ")[0];
+                    loginLink.style.color = "white"; 
+                }
+            })
+        }
+
+        //agrega un addEventListener al id cerrarSesion
+        cerrarSesion.addEventListener("click", function(event){
+            document.cookie = `${tokenCookie}=; expires=Thu, 01 Jan 2000 00:00:00 UTC; path=/;`; //hace que se elimine la cookie del token poniendo una fecha de caducidad de antes y poniendole un valor vacio, se pone path para asegurar que se elimine en todos los caminos de la app
+        })
+    </script>
+
+    <div class="table-container1">
+        <table>
+            <thead>
+                <tr>
+                    <th><span class="color-rojo">Username</span></th>
+                    <th><span class="color-rojo">Email</span></th>
+                </tr>
+            </thead>
+            <tbody id="user-container">
+                <!-- Aquí se añadirán las filas de la tabla -->
+            </tbody>
+        </table>
+    </div>
+    
+
+      <div class="table-container2">
+        <table>
+            <thead>
+                <tr>
+                <th><span class="color-rojo">Age</span></th>
+                <th><span class="color-rojo">Uptade</span></th>
+            </thead>
+            <tbody id="edad-container">
+                <!-- Aquí se añadirán las filas de la tabla -->
+            </tbody>
+        </table>
+      </div>
+
+      <div class="table-container3">
+        <table>
+          <thead>
+            <tr>
+                <th><span class="color-rojo">Time</span></th>
+                <th><span class="color-rojo">Uptade</span></th>
+          </thead>
+          <tbody id="horario-container">
+            <!-- Aquí se añadirán las filas de la tabla -->
+          </tbody>
+        </table>
+      </div>
+
+      <div class="table-container4">
+        <table>
+          <thead>
+            <tr>
+              <th><span class="color-rojo">Type</span></th>
+              <th><span class="color-rojo">Update</span></th>
+          </thead>
+          <tbody id="tipo-container">
+            <!-- Aquí se añadirán las filas de la tabla -->
+          </tbody>
+        </table>
+      </div>
+
+      <div class="table-container5">
+        <table>
+          <thead>
+            <tr>
+                <th><span class="color-rojo">Days</span></th>
+                <th><span class="color-rojo">Update</span></th>
+          </thead>
+          <tbody id="dias-container">
+            <!-- Aquí se añadirán las filas de la tabla -->
+          </tbody>
+        </table>
+      </div>
+
+      <div class="table-container6">
+        <table>
+          <thead>
+            <tr>
+              <th><span class="color-rojo">Membership</span></th>
+              <th><span class="color-rojo">Cost (USD)</span></th>
+              <th><span class="color-rojo">Info</span></th>
+              <th><span class="color-rojo">Delete</span></th>
+          </thead>
+          <tbody id="membership-container">
+            <!-- Aquí se añadirán las filas de la tabla -->
+          </tbody>
+        </table>
+      </div>
+
+    <script>
+        const cookies = document.cookie.split("; ");
+        const tokenCookie = cookies.find(cookie => cookie.startsWith("token="));
+        const token = tokenCookie ? tokenCookie.split("=")[1] : null;
+
+        // Realiza la solicitud para obtener la información del usuario
+        fetch('http://localhost:8000/api/users/me', {
+            method: "GET",
+            headers: {
+                "Authorization": "Bearer " + token,
+                "Content-Type": "application/json"
+            }
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log("User:", data);
+            const serviciosContainer = document.getElementById('user-container');
+            const row = document.createElement('tr');
+            row.innerHTML = `
+                <td>${data.username}</td>
+                <td>${data.email}</td>
+            `;
+            serviciosContainer.appendChild(row);
+        })
+
+        fetch('http://localhost:8000/api/horario',{
+            method: "GET",
+            headers: {
+                "Authorization": "Bearer " + token,
+                "Content-Type": "application/json"
+            }
+        })
+        .then(response=>response.json())
+        .then(data=>{
+            console.log("Horario:", data);
+            const edadContainer = document.getElementById('horario-container');
+            const row = document.createElement('tr');
+            row.id = data._id; 
+            row.innerHTML = `
+            <td>${data.horario}</td>
+            <td><button class="btn btn-primary btnModificar1">Update</button></td>
+            
+            `;
+            edadContainer.appendChild(row);
+        })
+
+        document.addEventListener('click', function(event) {
+          if (event.target.classList.contains('btnModificar1')) {
+              const btnModificar = event.target;
+              const fila = btnModificar.closest('tr');
+
+              const id = fila.id;
+              document.getElementById('idServicio1').value = id;
+
+              const horario = fila.querySelector('td:nth-child(1)').innerText;
+
+              document.getElementById('horarioInput').value = horario;
+
+              var modal = document.getElementById('modalFormulario1');
+              var modalInstance = new bootstrap.Modal(modal);
+              modalInstance.show();
+          }
+        });
+
+        fetch('http://localhost:8000/api/tipo',{
+            method: "GET",
+            headers: {
+                "Authorization": "Bearer " + token,
+                "Content-Type": "application/json"
+            }
+        })
+        .then(response=>response.json())
+        .then(data=>{
+            console.log("Tipo:", data);
+            const edadContainer = document.getElementById('tipo-container');
+            const row = document.createElement('tr');
+            row.id = data._id; 
+            row.innerHTML = `
+            <td>${data.tipo}</td>
+            <td><button class="btn btn-primary btnModificar2">Update</button></td>
+            `;
+            edadContainer.appendChild(row);
+        })
+
+        document.addEventListener('click', function(event) {
+          if (event.target.classList.contains('btnModificar2')) {
+              const btnModificar = event.target;
+              const fila = btnModificar.closest('tr');
+
+              const id = fila.id;
+              document.getElementById('idServicio2').value = id;
+
+              const tipo = fila.querySelector('td:nth-child(1)').innerText; //obtiene la primera celda de esa fila
+
+              document.getElementById('tipoInput').value = tipo;
+
+              let modal = document.getElementById('modalFormulario2');
+              let modalInstance = new bootstrap.Modal(modal);
+              modalInstance.show();
+          }
+        });
+
+        fetch('http://localhost:8000/api/edad',{
+            method: "GET",
+            headers: {
+                "Authorization": "Bearer " + token,
+                "Content-Type": "application/json"
+            }
+        })
+        .then(response=>response.json())
+        .then(data=>{
+            console.log("Edad:", data);
+            const edadContainer = document.getElementById('edad-container');
+            const row = document.createElement('tr');
+            row.id = data._id; 
+            row.innerHTML = `
+            <td>${data.edad}</td>
+            <td><button class="btn btn-primary btnModificar">Update</button></td>
+            `;
+            edadContainer.appendChild(row);
+        })
+
+        document.addEventListener('click', function(event) {
+          if (event.target.classList.contains('btnModificar')) {
+              const btnModificar = event.target;
+              const fila = btnModificar.closest('tr');
+
+              const id = fila.id;
+              document.getElementById('idServicio').value = id;
+
+              const edad = fila.querySelector('td:nth-child(1)').innerText; //obtiene la primera celda de esa fila
+
+              document.getElementById('edadInput').value = edad;
+
+              var modal = document.getElementById('modalFormulario');
+              var modalInstance = new bootstrap.Modal(modal);
+              modalInstance.show();
+          }
+        });
+
+        fetch('http://localhost:8000/api/dia',{
+            method: "GET",
+            headers: {
+                "Authorization": "Bearer " + token,
+                "Content-Type": "application/json"
+            }
+        })
+        .then(response=>response.json())
+        .then(data=>{
+            console.log("Dias:", data);
+            const edadContainer = document.getElementById('dias-container');
+            const row = document.createElement('tr');
+            row.id = data._id; 
+            row.innerHTML = `
+            <td>${data.dia}</td>
+            <td><button class="btn btn-primary btnModificar3">Update</button></td>
+            `;
+            edadContainer.appendChild(row);
+        })
+
+        document.addEventListener('click', function(event) {
+          if (event.target.classList.contains('btnModificar3')) {
+              const btnModificar = event.target;
+              const fila = btnModificar.closest('tr');
+
+              const id = fila.id;
+              document.getElementById('idServicio3').value = id;
+
+              const dia = fila.querySelector('td:nth-child(1)').innerText; 
+
+              document.getElementById('diasInput').value = dia;
+
+              var modal = document.getElementById('modalFormulario3');
+              var modalInstance = new bootstrap.Modal(modal);
+              modalInstance.show();
+          }
+        });
+
+        fetch('http://localhost:8000/api/memberships',{
+            method: "GET",
+            headers: {
+                "Authorization": "Bearer " + token,
+                "Content-Type": "application/json"
+            }
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log("Membership:", data);
+            const edadContainer = document.getElementById('membership-container');
+            const row = document.createElement('tr');
+            row.id = data._id; 
+            row.innerHTML = `
+            <td>${data.tipo}</td>
+            <td>${data.precio}</td>
+            <td>${data.descripcion}</td>
+            <td><button class="btn btn-primary" onclick="eliminarMembership('${data._id}')">Delete</button></td>
+            `;
+            edadContainer.appendChild(row);
+        })
+
+        function eliminarMembership(id){
+            fetch(`http://localhost:8000/api/memberships/${id}`,{
+                method: "DELETE",
+                headers: {
+                    "Authorization": "Bearer " + token,
+                    "Content-Type": "application/json"
+                }
+            }).then(response =>{
+                if(response.ok){
+                    response.json().then(data=>{
+                        console.log(data.message);
+                    })
+                    alert("Your membership is deleted, we recommend you to add another one")
+                    window.location.href = "/wp/wp.html#third-section"
+                }
+            }).catch(error=>{
+                console.log(error);
+            })
+        }
+
+    </script>
+
+    <div id="modalFormulario" class="modal fade" tabindex="-1" aria-labelledby="modalFormularioLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalFormularioLabel">Update age</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="actualizarCarrito">
+                        <div class="d-sm-flex mb-3 justify-content-center px-2" style="margin-left: -14px;">
+                            <div class="">
+                                <label for="edad">Age</label>
+                                <select name="edad" id="edadInput">
+                                    <option disabled selected>Select an option</option>
+                                    <option value="31+">31+</option>
+                                    <option value="30-">30-</option>
+                                </select>
+                            </div>
+                        </div>
+                        <input type="hidden" id="idServicio" name="idServicio">
+                        <button type="submit" class="btn btn-primary" id="actualizarServicio">Update</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="modalFormulario1" class="modal fade" tabindex="-1" aria-labelledby="modalFormularioLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalFormularioLabel">Update time</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="actualizarCarrito1">
+                        <div class="d-sm-flex mb-3 justify-content-center px-2" style="margin-left: -14px;">
+                            <div class="">
+                                <label for="horario">Time</label>
+                                <select name="horario" id="horarioInput">
+                                    <option disabled selected>Select an option </option>
+                                    <option value="In the morning">In the morning</option>
+                                    <option value="At night">At night</option>
+                                </select>
+                            </div>
+                        </div>
+                        <input type="hidden" id="idServicio1" name="idServicio1">
+                        <button type="submit" class="btn btn-primary" id="actualizarServicio">Update</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="modalFormulario2" class="modal fade" tabindex="-1" aria-labelledby="modalFormularioLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalFormularioLabel">Update type</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="actualizarCarrito2">
+                        <div class="d-sm-flex mb-3 justify-content-center px-2" style="margin-left: -14px;">
+                            <div class="">
+                                <label for="tipo">Types</label>
+                                <select name="tipo" id="tipoInput">
+                                    <option disabled selected>Select an option</option>
+                                    <option value="Weightlifting">Weightlifting</option>
+                                    <option value="Cardio">Cardio</option>
+                                </select>
+                            </div>
+                        </div>
+                        <input type="hidden" id="idServicio2" name="idServicio2">
+                        <button type="submit" class="btn btn-primary" id="actualizarServicio">Update</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="modalFormulario3" class="modal fade" tabindex="-1" aria-labelledby="modalFormularioLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalFormularioLabel">Update days</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="actualizarCarrito3">
+                        <div class="d-sm-flex mb-3 justify-content-center px-2" style="margin-left: -14px;">
+                            <div class="">
+                                <label for="dia">Days</label>
+                                <select name="dia" id="diasInput">
+                                    <option disabled selected>Select an option</option>
+                                    <option value="3-4 days">3-4 days</option>
+                                    <option value="5-6 days">5-6 days</option>
+                                </select>
+                            </div>
+                        </div>
+                        <input type="hidden" id="idServicio3" name="idServicio3">
+                        <button type="submit" class="btn btn-primary" id="actualizarServicio">Update</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById("actualizarCarrito").addEventListener("submit", function(event){
+            const cookies3 = document.cookie.split("; ");
+            const tokenCookie3 = cookies3.find(cookie => cookie.startsWith("token="));
+            const token3 = tokenCookie3 ? tokenCookie3.split("=")[1] : null;
+            event.preventDefault();
+            const jsonData = {}
+            const formData = new FormData(this)
+            formData.forEach((value, key) => {
+                jsonData[key] = value
+            })
+            const idServicio = document.getElementById('idServicio').value;
+            fetch(`http://localhost:8000/api/edad/${idServicio}`,{
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                    "Authorization" : "Bearer " + token3,
+                },
+                body: JSON.stringify(jsonData)
+            }).then(response =>response.json())
+            .then(data=>{
+                alert("The age is updated")
+                window.location.reload()
+            }).catch(error=>{
+                console.log(error)
+            })
+        })
+
+        document.getElementById("actualizarCarrito1").addEventListener("submit", function(event){
+            const cookies3 = document.cookie.split("; ");
+            const tokenCookie3 = cookies3.find(cookie => cookie.startsWith("token="));
+            const token3 = tokenCookie3 ? tokenCookie3.split("=")[1] : null;
+            event.preventDefault();
+            const jsonData = {}
+            const formData = new FormData(this)
+            formData.forEach((value, key) => {
+                jsonData[key] = value
+            })
+            const idServicio = document.getElementById('idServicio1').value;
+            fetch(`http://localhost:8000/api/horario/${idServicio}`,{
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                    "Authorization" : "Bearer " + token3,
+                },
+                body: JSON.stringify(jsonData)
+            }).then(response =>response.json())
+            .then(data=>{
+                alert("The time is updated")
+                window.location.reload()
+            }).catch(error=>{
+                console.log(error)
+            })
+        })
+
+        document.getElementById("actualizarCarrito2").addEventListener("submit", function(event){
+            const cookies3 = document.cookie.split("; ");
+            const tokenCookie3 = cookies3.find(cookie => cookie.startsWith("token="));
+            const token3 = tokenCookie3 ? tokenCookie3.split("=")[1] : null;
+            event.preventDefault();
+            const jsonData = {}
+            const formData = new FormData(this)
+            formData.forEach((value, key) => {
+                jsonData[key] = value
+            })
+            const idServicio = document.getElementById('idServicio2').value;
+            fetch(`http://localhost:8000/api/tipo/${idServicio}`,{
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                    "Authorization" : "Bearer " + token3,
+                },
+                body: JSON.stringify(jsonData)
+            }).then(response =>response.json())
+            .then(data=>{
+                alert("The type is updated")
+                window.location.reload()
+            }).catch(error=>{
+                console.log(error)
+            })
+        })
+
+        document.getElementById("actualizarCarrito3").addEventListener("submit", function(event){
+            const cookies3 = document.cookie.split("; ");
+            const tokenCookie3 = cookies3.find(cookie => cookie.startsWith("token="));
+            const token3 = tokenCookie3 ? tokenCookie3.split("=")[1] : null;
+            event.preventDefault();
+            const jsonData = {}
+            const formData = new FormData(this)
+            formData.forEach((value, key) => {
+                jsonData[key] = value
+            })
+            const idServicio = document.getElementById('idServicio3').value;
+            fetch(`http://localhost:8000/api/dia/${idServicio}`,{
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                    "Authorization" : "Bearer " + token3,
+                },
+                body: JSON.stringify(jsonData)
+            }).then(response =>response.json())
+            .then(data=>{
+                alert("The days are updated")
+                window.location.reload()
+            }).catch(error=>{
+                console.log(error)
+            })
+        })
+    </script>
+
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-3">
+                    <br>
+                    <img src="/img/gymshark.png" class="adjust-image-logo" alt="logo">
+                    <br><br>
+                </div>
+                <div class="col-sm-3">
+                    <br>
+                    <h6 class="my-4">TEL: 9818189203</h6>
+                    <br>
+                    <a href="/wp/wp.html#third-section">
+                        <h6>BECOME A MEMBER</h6>
+                    </a>
+                </div>
+                <div class="col-sm-3">
+                    <br>
+                    <a href="https://g.co/kgs/FFWeNGv">
+                        <h6 class="my-4">OUR GYM</h6>
+                    </a>
+                    <br>
+                    <a>
+                        <h6>Copyright © 2024 FitLife</h6>
+                    </a>
+                </div>
+                <div class="col-sm-3">
+                    <br>
+                    <a href="https://www.instagram.com/" class="my-4">
+                        <img src="/img/ig.png" class="ig-size" alt="ig">
+                    </a>
+                    <br><br>
+                    <a href="https://www.facebook.com/">
+                        <img src="/img/fb.png" class="fb-size mx-2" alt="fb">
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+</body>
+</html>

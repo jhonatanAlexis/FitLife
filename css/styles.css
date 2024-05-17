@@ -1,0 +1,31 @@
+.card{
+    border: 1px solid black; 
+    border-radius: 60px; 
+    width: 360px;
+    height: 350px;
+    background-color: rgb(212, 211, 211); 
+    transition: transform 0.3s ease-in-out; /* una transición aplicada al atributo transform para hacer el cambio suave durante 0.3 segundos.*/
+    margin-top: 30px; /* estable un margen (espacio) en la parte superior */
+    
+}
+.card:hover{
+    transform: scale(1.1); /* se utiliza para aplicar estilos adicionales cuando el mouse está encima de la tarjeta - El valor 1.1 indica que la tarjeta será un 10% más grande que su tamaño original.*/
+}
+h1{
+    font-size: 55px;
+    color:black;
+}
+.subrayado{
+    background-color: rgb(19, 18, 18);
+    display: inline; /* Para que el fondo solo ocupe el ancho del texto */
+    color: rgb(212, 211, 211);
+}
+a{
+    text-decoration: none; /* Elimina el subrayado en los enlaces */
+}
+body{
+    background-image: url('/img/bg-1.png'); 
+    background-size: cover; /* Ajusta el tamaño de la imagen para cubrir toda la pantalla */
+    background-position: center; /* Centra la imagen */
+    background-repeat: no-repeat; /* Evita la repetición de la imagen */
+}

@@ -1,0 +1,13 @@
+#Update{
+    margin-top: 180px;
+}
+body{
+    background-color: #0f0f0f;
+}
+.color-rojo{
+    color: #B6231B;
+}
+.button-custom{
+    background-color: #B6231B;
+    color: white;
+}

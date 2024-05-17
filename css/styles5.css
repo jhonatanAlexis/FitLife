@@ -1,0 +1,25 @@
+#Comienzo{
+    margin-top: 120px;
+    margin-left: 470px;
+}
+body{
+    background-color: #0f0f0f;
+}
+.color-rojo{
+    color: #B6231B;
+}
+.button-custom{
+    background-color: #B6231B;
+    color: white;
+}
+.button-custom:hover {
+    background-color: #B6231B; /* Mantener el color de fondo original al pasar el cursor */
+    color: white; /* Mantener el color de texto original al pasar el cursor */
+}
+
+a {
+    text-decoration: none;
+}
+.color-rojo-link:hover span {
+    color: rgba(0, 150, 255, 0.5); /* Cambia el color del texto al pasar el cursor */
+}
