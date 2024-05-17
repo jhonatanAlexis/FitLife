@@ -77,10 +77,30 @@
                     document.cookie = `token=${token}; path=/;` //se guarda el token en una cookie llamada token
                     document.cookie = `password=${jsonData["password"]}; path=/;`//se guarda la contraseña en una cookie llamada password
 
-                    alert("Inicio de sesion exitoso")
-                    window.location.href="login/login.html"
+                     // Verifica si el usuario ya ha respondido la primera pregunta
+                    fetch("http://localhost:8000/api/edad", {
+                        method: "GET",
+                        headers: {
+                            "Authorization": `Bearer ${token}`,
+                            "Content-Type": "application/json"
+                        }
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data && data.edad) {
+                            alert("Inicio de sesión exitoso. Ya has respondido las preguntas");
+                            window.location.href = "/wp/wp.html"; 
+                        } else {
+                            alert("Inicio de sesión exitoso");
+                            window.location.href = "/login/login.html";
+                        }
+                    })
+                    .catch(error => {
+                        console.log("Error al verificar la edad:", error);
+                    });
+                  }
                 }
-            })
+            )
             .catch(error=>{
                 console.log(error)
             })

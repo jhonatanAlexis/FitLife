@@ -53,7 +53,7 @@
             if(!data.error){
               alert(data.message)
               document.cookie = `${tokenCookie}=; expires=Thu, 01 Jan 2000 00:00:00 UTC; path=/;`;
-              window.location.href = "/user/register.html";
+              window.location.href = "/index.html";
             }
           })
           .catch(error=>{
